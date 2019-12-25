@@ -9,18 +9,16 @@
     <TextView
         android:id="@+id/tv_counter"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:gravity="center"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         android:textStyle="bold"
-        tools:text="Test 123 Fragment"
-        />
+        tools:text="Test 123 Fragment" />
     <ListView
         android:id="@+id/simpleListView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/blue_100"
         android:dividerHeight="1dp"
         />
 

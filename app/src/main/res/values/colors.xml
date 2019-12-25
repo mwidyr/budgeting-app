@@ -3,7 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="floatingButtonAdd">#A1A0B0</color>
+    <color name="gray">#A1A0B0</color>
+    <color name="light_gray">#D3D3D3</color>
     <color name="white">#FFFF</color>
 
     <color name="red_100">#F44336</color>
@@ -18,4 +19,6 @@
     <color name="green_300">#57BB8A</color>
     <color name="green_500">#673AB7</color>
     <color name="green_700">#0B8043</color>
+
+    <color name="black">#000000</color>
 </resources>

@@ -1,6 +1,31 @@
 <resources>
     <string name="app_name">Budgeting App</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="form_budget_amount">Budget Amount</string>
+    <string name="form_budget_title">Budget Title</string>
+    <string name="form_date_from">Date</string>
+    <string name="form_details">Details</string>
+    <string name="login_name">Hi, My Name is</string>
+    <string name="welcome_name">Welcome to nanana</string>
+    <string name="button_confirm">Add Budget</string>
+
+    <string-array name="budget_category">
+        <item>Other</item>
+        <item>Salary</item>
+        <item>Housing</item>
+        <item>Transportation</item>
+        <item>Food</item>
+        <item>Utilities</item>
+        <item>Insurance</item>
+        <item>Medical or Healthcare</item>
+        <item>Saving, Investing or Debt</item>
+        <item>Personal Spending</item>
+        <item>Recreations and Entertainment</item>
+    </string-array>
+
+    <string-array name="budget_type">
+        <item>Income</item>
+        <item>Planning</item>
+        <item>Expenditure</item>
+    </string-array>
 </resources>
