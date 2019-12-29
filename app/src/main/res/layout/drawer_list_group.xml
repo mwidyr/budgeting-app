@@ -1,0 +1,103 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:src="@drawable/group_statelist"
+            android:id="@+id/explist_indicator"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:layout_width="30px"
+            android:layout_height="30px"/>
+
+        <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/lblListHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceListItemSmall"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:textColor="#fff"
+            android:background="?android:attr/activatedBackgroundIndicator"
+            android:minHeight="?android:attr/listPreferredItemHeightSmall" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/amountIncome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/amountPlanning"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/amountExpenditure"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black" />
+</LinearLayout>
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:background="?android:attr/selectableItemBackground"-->
+<!--android:clickable="true"-->
+<!--android:focusable="true"-->
+<!--android:orientation="vertical">-->
+
+<!--<ImageView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:id="@+id/explist_indicator"-->
+<!--    android:layout_width="30px"-->
+<!--    android:layout_height="30px"-->
+<!--    android:src="@drawable/group_statelist" />-->
+
+<!--<TextView-->
+<!--    android:layout_toEndOf="@id/explist_indicator"-->
+<!--    android:id="@+id/title"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_alignParentTop="true"-->
+<!--    android:text="title"-->
+<!--    android:textColor="@color/black"-->
+<!--    android:textSize="16dp"-->
+<!--    android:textStyle="bold"-->
+<!--    android:layout_toRightOf="@id/explist_indicator" />-->
+
+<!--<TextView-->
+<!--    android:layout_toEndOf="@id/explist_indicator"-->
+<!--    android:id="@+id/amountIncome"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_below="@id/title"-->
+<!--    android:textColor="@color/black"-->
+<!--    android:layout_toRightOf="@id/explist_indicator" />-->
+
+<!--<TextView-->
+<!--    android:id="@+id/amountPlanning"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_alignParentRight="true"-->
+<!--    android:textColor="@color/black" />-->
+
+<!--<TextView-->
+<!--    android:id="@+id/amountExpenditure"-->
+<!--    android:layout_width="wrap_content"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:layout_below="@id/amountPlanning"-->
+<!--    android:layout_alignParentRight="true"-->
+<!--    android:textColor="@color/black" />-->
+
+<!--</RelativeLayout>-->
+

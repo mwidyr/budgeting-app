@@ -24,7 +24,7 @@ import com.example.budgetingapp.R;
 import com.example.budgetingapp.dto.BudgetRecapDto;
 import com.example.budgetingapp.model.InputBudget;
 
-public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
+public class ExpandableMonthlyAdapter extends BaseExpandableListAdapter {
     private static final String TAG = "CustomExpandable";
     private static final NumberFormat formatter = new DecimalFormat("'Rp' #,###,###,###");
     private static final String EXTRA_ID = "idInputBudget";
@@ -33,7 +33,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     private HashMap<String, List<InputBudget>> recapDtoDetail;
     private List<BudgetRecapDto> recapDtos;
 
-    public CustomExpandableListAdapter(Context context,
+    public ExpandableMonthlyAdapter(Context context,
                                        List<BudgetRecapDto> recapDtos) {
         this.context = context;
         this.recapDtos = recapDtos;
@@ -66,7 +66,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
             convertView = layoutInflater.inflate(R.layout.list_item, null);
         }
 
-        
+
 
         if(this.recapDtoDetail.get(this.recapDtos.get(listPosition).getType()).size()>expandedListPosition){
             Log.d(TAG, "getChildView: kurang dari size");
@@ -158,7 +158,7 @@ public class CustomExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int listPosition, int expandedListPosition) {
         return true;
     }
-    
+
     private void showDialogDelete(final InputBudget inputBudget){
         Log.d(TAG, "showDialogDelete: ");
         new AlertDialog.Builder(context)

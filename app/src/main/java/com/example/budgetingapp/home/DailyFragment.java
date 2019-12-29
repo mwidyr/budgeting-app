@@ -2,10 +2,10 @@ package com.example.budgetingapp.home;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.room.Database;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.budgetingapp.InputBudgetActivity;
+import com.example.budgetingapp.MainActivity;
 import com.example.budgetingapp.R;
 import com.example.budgetingapp.database.AppDatabase;
 import com.example.budgetingapp.dto.BudgetRecapDto;
@@ -30,19 +32,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 public class DailyFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
-//    List<BudgetRecapDto> budgetList = new ArrayList<>();
     private static final String TAG = "DailyFragment";
+    private static final String EXTRA_ID = "idInputBudget";
     private Context context;
     private AppDatabase db;
     View view;
     ExpandableListView expandableListView;
     ExpandableListAdapter expandableListAdapter;
-    List<String> expandableListTitle;
-    HashMap<String, List<String>> expandableListDetail;
 
     private ImageView btnLeft, btnRight;
     private TextView datePicker;
@@ -53,9 +52,14 @@ public class DailyFragment extends Fragment implements DatePickerDialog.OnDateSe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_daily, container, false);
-        calendar = Calendar.getInstance();
+        if(getActivity()!=null&&((MainActivity)getActivity()).getCalendar()!=null){
+            calendar = ((MainActivity)getActivity()).getCalendar();
+        }else{
+            calendar = Calendar.getInstance();
+        }
         btnLeft = view.findViewById(R.id.btn_left_date);
         btnRight = view.findViewById(R.id.btn_right_date);
         datePicker = view.findViewById(R.id.tv_date_picker);
@@ -86,53 +90,12 @@ public class DailyFragment extends Fragment implements DatePickerDialog.OnDateSe
 
 
         expandableListView = view.findViewById(R.id.expandableListView);
-        expandableListDetail = getData();
-        expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
-
         refreshLayout();
-//        expandableListAdapter = new CustomExpandableListAdapter(getActivity(), expandableListTitle,
-//                expandableListDetail,budgetList);
-//        expandableListView.setAdapter(expandableListAdapter);
-//        expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-//
-//            @Override
-//            public void onGroupExpand(int groupPosition) {
-//                Toast.makeText(getActivity(),
-//                        expandableListTitle.get(groupPosition) + " List Expanded.",
-//                        Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        expandableListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-//
-//            @Override
-//            public void onGroupCollapse(int groupPosition) {
-//                Toast.makeText(getActivity(),
-//                        expandableListTitle.get(groupPosition) + " List Collapsed.",
-//                        Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
-//
-//        expandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-//            @Override
-//            public boolean onChildClick(ExpandableListView parent, View v,
-//                                        int groupPosition, int childPosition, long id) {
-//                Toast.makeText(
-//                        getActivity(),
-//                        expandableListTitle.get(groupPosition)
-//                                + " -> "
-//                                + expandableListDetail.get(
-//                                expandableListTitle.get(groupPosition)).get(
-//                                childPosition), Toast.LENGTH_SHORT
-//                ).show();
-//                return false;
-//            }
-//        });
         return view;
     }
 
-    private void refreshLayout(){
+    public void refreshLayout(){
+        ((MainActivity)getActivity()).setCalendar(calendar);
         //use db with calendar configuration
         Calendar calendarMin = Calendar.getInstance();
         calendarMin.setTime(calendar.getTime());
@@ -148,7 +111,7 @@ public class DailyFragment extends Fragment implements DatePickerDialog.OnDateSe
         calendarMax.set(Calendar.MILLISECOND,0);
         List<InputBudget> budgetList = db.inputBudgetDao()
                 .findByMonth(calendarMin.getTimeInMillis(), calendarMax.getTimeInMillis());
-        List<BudgetRecapDto> budgetRecapDtos = new ArrayList<>();
+        final List<BudgetRecapDto> budgetRecapDtos = new ArrayList<>();
         Double amountIncome= 0.0;
         Double amountPlanning = 0.0;
         Double amountExpenditure = 0.0;
@@ -196,15 +159,15 @@ public class DailyFragment extends Fragment implements DatePickerDialog.OnDateSe
             budgetRecapDtos.add(recapDto);
         }
 
-        expandableListAdapter = new CustomExpandableListAdapter(getActivity(), expandableListTitle,
-                expandableListDetail,budgetRecapDtos);
+        expandableListAdapter = new CustomExpandableListAdapter(getActivity(),
+                budgetRecapDtos);
         expandableListView.setAdapter(expandableListAdapter);
         expandableListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
             @Override
             public void onGroupExpand(int groupPosition) {
                 Toast.makeText(getActivity(),
-                        expandableListTitle.get(groupPosition) + " List Expanded.",
+                        budgetRecapDtos.get(groupPosition).getType() + " List Expanded.",
                         Toast.LENGTH_SHORT).show();
             }
         });
@@ -214,7 +177,7 @@ public class DailyFragment extends Fragment implements DatePickerDialog.OnDateSe
             @Override
             public void onGroupCollapse(int groupPosition) {
                 Toast.makeText(getActivity(),
-                        expandableListTitle.get(groupPosition) + " List Collapsed.",
+                        budgetRecapDtos.get(groupPosition).getType() + " List Collapsed.",
                         Toast.LENGTH_SHORT).show();
 
             }
@@ -226,58 +189,30 @@ public class DailyFragment extends Fragment implements DatePickerDialog.OnDateSe
                                         int groupPosition, int childPosition, long id) {
                 Toast.makeText(
                         getActivity(),
-                        expandableListTitle.get(groupPosition)
+                        budgetRecapDtos.get(groupPosition).getType()
                                 + " -> "
-                                + expandableListDetail.get(
-                                expandableListTitle.get(groupPosition)).get(
-                                childPosition), Toast.LENGTH_SHORT
+                                + budgetRecapDtos.get(groupPosition).getInputBudgetList().get(childPosition),
+                        Toast.LENGTH_SHORT
                 ).show();
+//                Intent intent = new Intent(getActivity(), InputBudgetActivity.class);
+//                intent.putExtra(EXTRA_ID,budgetRecapDtos.get(groupPosition).getInputBudgetList().get(childPosition).id);
+////                intent.putString("key1", budgetRecapDtos.get(groupPosition).getInputBudgetList().get(childPosition).id+"");// if its string type
+////                Intent.putExtra("key2", var2);// if its int type
+//                startActivity(intent);
                 return false;
             }
         });
     }
 
-    public static HashMap<String, List<String>> getData() {
-        HashMap<String, List<String>> expandableListDetail = new HashMap<String, List<String>>();
-
-        List<String> cricket = new ArrayList<>();
-        cricket.add("India");
-        cricket.add("Pakistan");
-        cricket.add("Australia");
-        cricket.add("England");
-        cricket.add("South Africa");
-
-        List<String> football = new ArrayList<String>();
-        football.add("Brazil");
-        football.add("Spain");
-        football.add("Germany");
-        football.add("Netherlands");
-        football.add("Italy");
-
-        List<String> basketball = new ArrayList<String>();
-        basketball.add("United States");
-        basketball.add("Spain");
-        basketball.add("Argentina");
-        basketball.add("France");
-        basketball.add("Russia");
-
-        expandableListDetail.put("CRICKET TEAMS", cricket);
-        expandableListDetail.put("FOOTBALL TEAMS", football);
-        expandableListDetail.put("BASKETBALL TEAMS", basketball);
-        return expandableListDetail;
-    }
-
     public static DailyFragment newInstance(Integer counter, Context context, AppDatabase db) {
         DailyFragment fragment = new DailyFragment(context, db);
         Bundle args = new Bundle();
-//        args.putInt(ARG_COUNT, counter);
         fragment.setArguments(args);
         return fragment;
     }
     public DailyFragment(Context context, AppDatabase db) {
         this.context = context;
         this.db = db;
-//        this.budgetList = budgetList;
     }
 
     private void showDatePicker() {

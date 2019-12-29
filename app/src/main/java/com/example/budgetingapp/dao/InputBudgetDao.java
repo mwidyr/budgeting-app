@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.budgetingapp.model.InputBudget;
 
@@ -16,6 +17,9 @@ public interface InputBudgetDao {
 
     @Query("SELECT * FROM inputBudget where date_from = (:inputDate)")
     List<InputBudget> findByDay(Long inputDate);
+
+    @Query("SELECT * FROM inputBudget where id = (:id)")
+    InputBudget findById(Long id);
 
     @Query("SELECT * FROM inputBudget where date_from >= (:inputDateMin) " +
             "AND date_from <= (:inputDateMax)")
@@ -33,4 +37,7 @@ public interface InputBudgetDao {
 
     @Delete
     void delete(InputBudget inputBudget);
+
+    @Update
+    void update(InputBudget... inputBudgets);
 }

@@ -5,11 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".home.YearlyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="80sp"
-        android:text="YEARLY FRAGMENT"/>
+<!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:textSize="80sp"-->
+<!--        android:text="YEARLY FRAGMENT"/>-->
+
+    <ExpandableListView
+        android:id="@+id/expandableListView_Parent"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:groupIndicator="@null" />
 
 </FrameLayout>
