@@ -7,7 +7,7 @@
     tools:context=".home.DailyFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:background="@color/green_700"
+        android:background="@color/blue_300"
         android:id="@+id/layout_date_picker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -61,7 +61,10 @@
         android:id="@+id/expandableListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="0.5dp"
         android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"

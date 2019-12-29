@@ -5,8 +5,8 @@
     <string name="form_budget_title">Budget Title</string>
     <string name="form_date_from">Date</string>
     <string name="form_details">Details</string>
-    <string name="login_name">Hi, My Name is</string>
-    <string name="welcome_name">Welcome to nanana</string>
+    <string name="login_name">Hi, User!</string>
+    <string name="welcome_name">Welcome to Budgeting App...</string>
     <string name="button_confirm">Add Budget</string>
 
     <string-array name="budget_category">
@@ -29,25 +29,4 @@
         <item>Expenditure</item>
     </string-array>
 
-    <string-array name="items_array_expandable_level_one">
-        <item>Level 1.1</item>
-        <item>Level 1.2</item>
-        <item>Level 1.3</item>
-    </string-array>
-    <string-array name="items_array_expandable_level_one_one_child">
-        <item>Level 1.1.1</item>
-        <item>Level 1.1.2</item>
-    </string-array>
-    <string-array name="items_array_expandable_level_one_two_child">
-        <item>Level 1.2.1</item>
-    </string-array>
-    <string-array name="items_array_expandable_other_child">
-        <item>Second Level 01</item>
-        <item>Second Level 02</item>
-        <item>Second Level 03</item>
-    </string-array>
-    <string-array name="items_array_expandable_level_three">
-        <item>Child Level 01</item>
-        <item>Child Level 02</item>
-    </string-array>
 </resources>

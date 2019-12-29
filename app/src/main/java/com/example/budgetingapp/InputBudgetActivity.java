@@ -18,6 +18,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -63,6 +64,7 @@ public class InputBudgetActivity extends AppCompatActivity implements DatePicker
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_input_budget);
         db = Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database-name").allowMainThreadQueries()

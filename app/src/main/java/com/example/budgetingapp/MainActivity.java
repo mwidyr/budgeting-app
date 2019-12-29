@@ -5,39 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.budgetingapp.database.AppDatabase;
-import com.example.budgetingapp.dto.BudgetRecapDto;
-import com.example.budgetingapp.dto.InputBudgetDto;
 import com.example.budgetingapp.model.InputBudget;
 import com.example.budgetingapp.util.ViewPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
-import com.tsongkha.spinnerdatepicker.DatePicker;
-import com.tsongkha.spinnerdatepicker.DatePickerDialog;
-import com.tsongkha.spinnerdatepicker.SpinnerDatePickerDialogBuilder;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -48,17 +34,9 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     TabLayout tabLayout;
     ViewPager2 viewPager;
-    AlertDialog dialog;
-    LayoutInflater inflater;
-//    View dialogView;
-    EditText et_title, et_amount, date_from, date_to, et_details;
     TextView tv_balance_amount;
-    InputBudgetDto inputBudgetDto;
-    boolean dateFromClicked;
-    private static final String simpleDateFormatPattern = "dd-MM-yyyy";
-    private static final Integer DEFAULT_DAY = 1;
-    private static final Integer DEFAULT_MONTH = 0;
-    private static final Integer DEFAULT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    ImageView iv_menu,iv_filter_search,iv_balance_home_more;
+
     private static final NumberFormat formatter = new DecimalFormat("'Rp' #,###,###,###");
     private TabLayout.Tab tabSelected;
 
@@ -141,9 +119,32 @@ public class MainActivity extends AppCompatActivity {
         tv_balance_amount = findViewById(R.id.tv_balance_amount);
         viewPager = findViewById(R.id.view_pager);
         tabLayout = findViewById(R.id.tabs);
+        iv_menu = findViewById(R.id.btn_home_more);
+        iv_filter_search = findViewById(R.id.btn_menu_filter);
+        iv_balance_home_more = findViewById(R.id.balance_home_more);
+
         setCalendar(Calendar.getInstance());
 
+        iv_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "More is Selected", Toast.LENGTH_SHORT).show();
+            }
+        });
 
+        iv_filter_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Menu Filter is Selected", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        iv_balance_home_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Balance Home is Selected", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
