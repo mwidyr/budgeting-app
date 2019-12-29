@@ -21,7 +21,7 @@ import java.util.List;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
     private static final String TAG = "ViewPager";
-    private static final int CARD_ITEM_SIZE = 3;
+    private static final int CARD_ITEM_SIZE = 2;
     private Context context;
     private AppDatabase db;
 
