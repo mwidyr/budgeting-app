@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
     private static final String TAG = "MainActivity";
     private static final String EXTRA_TIMEINMILIS = "extraTimeInMilis";
     private static final String BALANCE_THIS_MONTH = "Balance this ";
-    private static final String simpleDateFormatPattern = "dd-MM-yyyy";
     private static final Integer DEFAULT_DAY = 1;
     private static final Integer DEFAULT_MONTH = 0;
     private static final Integer DEFAULT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
@@ -132,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
         setDb(Room.databaseBuilder(getApplicationContext(),
                 AppDatabase.class, "database-name").allowMainThreadQueries()
                 .fallbackToDestructiveMigration().build());
+
         fab = findViewById(R.id.btn_addBudget);
         tv_balance_amount = findViewById(R.id.tv_balance_amount);
         viewPager = findViewById(R.id.view_pager);
@@ -184,7 +184,11 @@ public class MainActivity extends AppCompatActivity implements DatePickerDialog.
                     @Override
                     public void onClick(View view) {
                         Toast.makeText(MainActivity.this, SHOW_CHART_FOR+getMonthString(), Toast.LENGTH_SHORT).show();
-                        alertDialog.cancel();
+                        Intent intent = new Intent(MainActivity.this, ChartActivity.class);
+                        Log.d(TAG, "onClick: timeInMilis " + getCalendar().getTimeInMillis());
+                        Long timeInMilis = getCalendar().getTimeInMillis();
+                        intent.putExtra(EXTRA_TIMEINMILIS, timeInMilis);
+                        startActivity(intent);;
                     }
                 });
 
